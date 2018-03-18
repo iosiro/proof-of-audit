@@ -1,0 +1,42 @@
+Proof-of-Audit
+==============
+
+After engaging with many clients around smart contract auditing, we've heard a recurring theme:
+
+ "Will you publish the report publicly?"
+
+To which our answer is:
+
+  "Completely up to you, we don't publish it unless you want us to."
+
+From here, what typically happens is that we audit their smart contracts,
+discover one or more vulnerabilities in their codebase and put these findings in
+a final report to them along with recommendations on how to fix them. This however
+puts our client into a quandary. Should they publish our audit to show that they
+care enough about their users and project to have had one done, only to reveal
+that the project had a number high risk vulnerabilities in it? What kind of message does this send to their users about their competency? Will this
+actually detract from the public's perception about their security capability?
+
+The overwhelming majority of the time, our client is swift to remediate the
+vulnerabilities and fix these before the project goes live. Which means we can
+adapt the report, remove the vulnerabilities and just publish this new report which
+passes with flying colours right? Well, unfortunately not. We are meticulous about our
+work, right down to the specific commit hash of a codebase. We aren't comfortable giving
+a team our thumbs up without reexamining their entire codebase to make sure we haven't missed anything (
+often
+)
+
+This is why we've developed the iosiro proof-of-audit badge.
+
+{{badge}}
+
+Verify, don't trust
+===================
+
+Projects with this badge have cryptographic proof that they've engaged iosiro for
+ security work. Exactly what work that is, depends on the client and project.
+ This information is revealed by clicking on the button. The button will take you to our
+website where we will cryptographically validate the button and let the user
+know about the work we've done for them. It's probably easiest to just see it in action:
+
+{{demo}}

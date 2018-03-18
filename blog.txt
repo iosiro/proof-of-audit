@@ -22,9 +22,9 @@ vulnerabilities and fix these before the project goes live. Which means we can
 adapt the report, remove the vulnerabilities and just publish this new report which
 passes with flying colours right? Well, unfortunately not. We are meticulous about our
 work, right down to the specific commit hash of a codebase. We aren't comfortable giving
-a team our thumbs up without reexamining their entire codebase to make sure we haven't missed anything (
-often
-)
+a client our thumbs up without reexamining their entire codebase to make sure we haven't missed anything (
+often, fixes to vulnerabilities involve complex reworking of code, which might reintroduce additional vulnerabilities
+).
 
 This is why we've developed the iosiro proof-of-audit badge.
 
@@ -35,8 +35,23 @@ Verify, don't trust
 
 Projects with this badge have cryptographic proof that they've engaged iosiro for
  security work. Exactly what work that is, depends on the client and project.
- This information is revealed by clicking on the button. The button will take you to our
+ However this information is revealed by clicking on the button. The button will take you to our
 website where we will cryptographically validate the button and let the user
 know about the work we've done for them. It's probably easiest to just see it in action:
 
 {{demo}}
+
+Asymmetric Cryptography
+===================
+
+The technical details for the project are available for anyone to read through on our github page{{link}}. However, in summary, the way that our proof-of-audit works is similar to the cryptography that underpins the blockchain. We have a private (PGP) key that we use to sign the information in a proof-of-audit (like the name of the client, the nature of the work we did for them and the date).
+Clicking on the badge will take you through to our website where our public key verifies the information contained in the button. In other words, only iosiro can sign a valid badge that checks out with our public key! This means that a bad guy can't just copy the badge and put their own name in it, it'll fail if you try. {{try me}}
+
+Conclusion
+==========
+
+This is a win-win-win scenario for everyone involved:
+
+- The website users: The visitors to a website can independently verify that a client has spend money on security with a reputable firm, and that they aren't going to lose their data or funds through negligence on the part of the website
+- The website owner: The website owner can leverage the fact that they (unfortunately, unlike many companies in the space) really care about the security of their users and their data
+- iosiro: The iosiro brand is built alongside our happy customers!

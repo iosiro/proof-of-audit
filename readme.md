@@ -8,9 +8,9 @@ assurance to customers that the customer takes security seriously, and customers
 will thank them for it.
 
 Query String
-===========
+------------
 
-The query string is a base64'd JSON object. The object contains the following
+The query string is a base64'd, PGP signed JSON string. The string contains the following
 fields:
 
 - Client Name (The name of the Client or Customer)
@@ -26,5 +26,23 @@ fields:
   "description" : "A standard smart contract audit conducted against the smart contracts available on https://github.com/iosiro/contracts/ with commit hash 38aef92"
 
 }
+```
+
+Signing Tool
+------------
+
+Signing tool is an interactive tool that creates the message that is signed by our PGP key. Simply run:
 
 ```
+python3 signing_tool.py
+```
+
+Settings
+------------
+
+A number of settings are available to customise in settings.py.
+
+- dns
+
+Dependencies
+------------

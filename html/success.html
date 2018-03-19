@@ -1,11 +1,60 @@
-<html>
+<!doctype html>
+<html lang="en">
 
-<h1>Verified: {{client_name}}</h1>
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-<p>iosiro can confirm that we have engaged with the client and have done the following work for them:</p>
-<h2>{{nature_of_work}}</h2>
-<p>{{description}}</p>
-<p>Date: {{date_signed}}</p>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="static/style.css">
+    <title>Verify - iosiro</title>
+</head>
 
+<body>
+    <div class="site-wrapper">
+        <main role="main" class="container">
+            <div class="jumbotron box-padding">
+                <div class="row">
+                    <div class="col-md-4">
+                        <img src="static/secured_by_iosiro.png" height="200px" width="240px" alt="No image">
+                    </div>
+                    <div class="col-md-8">
+                        <table class="table table-padding">
+                            <tbody>
+                                <tr>
+                                    <th>Company</th>
+                                    <td>{{client_name}}</td>
+                                </tr>
+                                <tr>
+                                    <th>Nature of Work</th>
+                                    <td>{{nature_of_work}}</td>
+                                </tr>
+                                <tr>
+                                    <th>Description</th>
+                                    <td>{{description}}</td>
+                                </tr>
+                                <tr>
+                                    <th>Date Signed</th>
+                                    <td>{{date_signed}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+        </main>
+
+    </div>
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js "></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js "></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js "></script>
+</body>
 
 </html>

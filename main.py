@@ -23,10 +23,14 @@ class MainHandler(tornado.web.RequestHandler):
                     self.render("html/error.html", error_message="The signature on the image is incorrect.")
             except Exception as e:
                 print (e)
-                #print("here")
                 self.render("html/error.html", error_message="Something went wrong, that's all we know.")
         else:
             self.render("html/error.html", error_message="Hmmmm. That badge wasn't configured correctly. Please let the website know!")
+
+class errorHandler(tornado.web.RequestHandler):
+    def prepare(self):
+        self.set_status(404)
+        self.redirect('/verify')
 
 def extract_message_from_signed_pgp(text):
     start = '''-----BEGIN PGP SIGNED MESSAGE-----
@@ -75,13 +79,19 @@ def check_file_signature(filepath):
     '''
 
 def make_app():
-    return tornado.web.Application([
-        (r"/verify", MainHandler),
-    ])
+    handlers = [(r"/static/(.*)", tornado.web.StaticFileHandler, {'path': "./html/static"}),
+        (r"/verify", MainHandler)]
+    settings = {
+            # "debug": True,
+        }
+    app = tornado.web.Application(handlers=handlers, default_handler_class=errorHandler, **settings)
+    return app
 
 if __name__ == "__main__":
     #Import public key...
     os.system("gpg --import public_key.pub")
     app = make_app()
     app.listen(8888)
-    tornado.ioloop.IOLoop.current().start()
+
+    tornado.ioloop.IOLoop.current().start();
+    

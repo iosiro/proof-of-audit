@@ -1,29 +1,29 @@
 Description
 ===========
 
-This project provides a website that can be queried by a PGP signed base64 string which
-contains information about work done for a client. This allows a client to cryptographically
+A website that verifies a PGP signed base64 string
+containing information about work done for a company. This allows a company to cryptographically
 prove that iosiro has conducted security work for them. Most often, this gives
-assurance to customers that the customer takes security seriously, and customers
+assurance to the company's customers that the company takes security seriously, and customers
 will thank them for it.
 
 Query String
 ------------
 
-The query string is a base64'd, PGP signed JSON string. The string contains the following
+The query string is a base64 encoded, PGP signed JSON string. The string contains the following
 fields:
 
-- Client Name (The name of the Client or Customer)
-- Date of work done
-- Nature of work done (Smart contract audit, penetration test)
-- Description (Further information about the scope, duration and links to relevant artifacts about the test.)
+- Client Name - The name of the company
+- Date Signed - Date of work done
+- Nature of work done - e.g. Smart contract audit, penetration test, etc.
+- Description - Further information about the scope, duration and links to relevant artifacts about the test.
 
 ```
 {
   "client_name" : "Name",
   "date_signed" : "2018-03-16 14:49:05.624434",
   "nature_of_work" : "Smart Contract Audit"
-  "description" : "A standard smart contract audit conducted against the smart contracts available on https://github.com/iosiro/contracts/ with commit hash 38aef92"
+  "description" : "A standard smart contract audit conducted against the smart contracts available on https://github.com/iosiro/ico/contracts/ with commit hash 38aef92"
 
 }
 ```

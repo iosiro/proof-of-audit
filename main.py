@@ -21,7 +21,7 @@ class MainHandler(tornado.web.RequestHandler):
                     self.render("html/success.html", client_name = verification_values['client_name'],
                     description= verification_values['description'], date_signed=verification_values['date_signed'], nature_of_work=verification_values['nature_of_work'] )
                 else:
-                    self.render("html/error.html", error_message="The signature on the image is incorrect.")
+                    self.render("html/error.html", error_message="The signature on the badge is incorrect!")
             except Exception as e:
                 print (e)
                 #print("here")

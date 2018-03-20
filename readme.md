@@ -7,6 +7,14 @@ prove that iosiro has conducted security work for them. Most often, this gives
 assurance to the company's customers that the company takes security seriously, and customers
 will thank them for it.
 
+Get Started
+-----------
+
+1. Save your public key in public_key.pub (this should be in ascii armour format).
+2. Save the key fingerprint in settings.py under key_fingerprint
+3. Set the user to sign the message as in settings.py
+4. Set the DNSname to be used in the verification URL in settings.py
+
 Query String
 ------------
 
@@ -37,12 +45,7 @@ Signing tool is an interactive tool that creates the message that is signed by o
 python3 signing_tool.py
 ```
 
-Settings
-------------
-
-A number of settings are available to customise in settings.py.
-
-- dns
-
 Dependencies
 ------------
+
+GPG should be installed on the machine locally. Use python3 -m pip install -r requirements.txt to install tornado. 

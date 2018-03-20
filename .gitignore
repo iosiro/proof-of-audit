@@ -6,6 +6,8 @@ __pycache__/
 # C extensions
 *.so
 
+firewall_rules.sh
+
 # Distribution / packaging
 .Python
 env/
@@ -99,7 +101,3 @@ ENV/
 
 # mypy
 .mypy_cache/
-
-.vs_code/
-.DS_STORE
-html/.DS_STORE

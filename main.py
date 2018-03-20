@@ -6,6 +6,7 @@ import hashlib
 import os
 import subprocess
 from subprocess import PIPE
+from settings import *
 
 class MainHandler(tornado.web.RequestHandler):
     def get(self):
@@ -23,14 +24,10 @@ class MainHandler(tornado.web.RequestHandler):
                     self.render("html/error.html", error_message="The signature on the image is incorrect.")
             except Exception as e:
                 print (e)
+                #print("here")
                 self.render("html/error.html", error_message="Something went wrong, that's all we know.")
         else:
             self.render("html/error.html", error_message="Hmmmm. That badge wasn't configured correctly. Please let the website know!")
-
-class errorHandler(tornado.web.RequestHandler):
-    def prepare(self):
-        self.set_status(404)
-        self.redirect('/verify')
 
 def extract_message_from_signed_pgp(text):
     start = '''-----BEGIN PGP SIGNED MESSAGE-----
@@ -55,43 +52,39 @@ def verify_pgp_signature(text):
     return sig_check
 
 def check_file_signature(filepath):
-    #subprocess.call(["gpg", "--verify-file", filepath])
-    print(filepath)
-    print(type(filepath))
-    #proc = subprocess.Popen(["gpg", "--verify-file", str("{}".format(filepath))], stdout=PIPE , stderr=PIPE)
     proc = subprocess.Popen(["gpg", "--verify-file", filepath], stdout=PIPE , stderr=PIPE)
-
-    #stdout = proc.stdout.read()
     output = proc.stderr.read().decode()
+    is_good_sig = False
+    is_correct_user = False
     for i in output.splitlines():
-        if '''gpg: Good signature from "iosiro <security@iosiro.com>"''' in i:
-            print ("[+] Good signature found...")
-            return True
-    print ("[!] Signature is BAD!")
-    return False
+        if '''gpg: Good signature from''' in i:
+            is_good_sig = True
+        if '''BAD signature from''' in i:
+            is_good_sig = False
+            break
+        if key_fingerprint in i:
+            is_correct_user = True
 
-    '''try:
-        outs, errs = proc.communicate(timeout=15)
-    except TimeoutExpired:
-        proc.kill()
-        outs, errs = proc.communicate()
-    print(outs, errs)
-    '''
+    if is_correct_user and is_good_sig:
+        print ("[+] Good signature found...")
+        return True
+    else:
+        print ("[!] Signature is BAD!")
+        return False
+
+class LandingPage(tornado.web.RequestHandler):
+    def get(self):
+        self.redirect(redirect_url)
 
 def make_app():
-    handlers = [(r"/static/(.*)", tornado.web.StaticFileHandler, {'path': "./html/static"}),
-        (r"/verify", MainHandler)]
-    settings = {
-            # "debug": True,
-        }
-    app = tornado.web.Application(handlers=handlers, default_handler_class=errorHandler, **settings)
-    return app
+    return tornado.web.Application([
+        (r"/verify", MainHandler),
+        (r"/", LandingPage)
+    ])
 
 if __name__ == "__main__":
     #Import public key...
     os.system("gpg --import public_key.pub")
     app = make_app()
     app.listen(8888)
-
-    tornado.ioloop.IOLoop.current().start();
-    
+    tornado.ioloop.IOLoop.current().start()

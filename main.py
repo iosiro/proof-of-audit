@@ -61,7 +61,7 @@ def check_file_signature(filepath):
         if '''BAD signature from''' in i:
             is_good_sig = False
             break
-        if key_fingerprint in i:
+        if key_fingerprint.lower() in i.lower().replace(" ", ""):
             is_correct_user = True
 
     if is_correct_user and is_good_sig:

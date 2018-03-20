@@ -24,7 +24,6 @@ class MainHandler(tornado.web.RequestHandler):
                     self.render("html/error.html", error_message="The signature on the badge is incorrect!")
             except Exception as e:
                 print (e)
-                #print("here")
                 self.render("html/error.html", error_message="Something went wrong, that's all we know.")
         else:
             self.render("html/error.html", error_message="Hmmmm. That badge wasn't configured correctly. Please let the website know!")

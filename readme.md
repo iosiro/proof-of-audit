@@ -3,7 +3,7 @@ Description
 
 A website that verifies a PGP signed base64 string
 containing information about work done for a company. This allows a company to cryptographically
-prove that iosiro has conducted security work for them. Most often, this gives
+prove that [iosiro](https://www.iosiro.com) has conducted security work for them. Most often, this gives
 assurance to the company's customers that the company takes security seriously, and customers
 will thank them for it.
 
@@ -48,4 +48,4 @@ python3 signing_tool.py
 Dependencies
 ------------
 
-GPG should be installed on the machine locally. Use python3 -m pip install -r requirements.txt to install tornado. 
+GPG should be installed on the machine locally. Use python3 -m pip install -r requirements.txt to install tornado.

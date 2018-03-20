@@ -1,5 +1,6 @@
 ufw deny from 0.0.0.0/0
 ufw allow ssh
+ufw deny from 0.0.0.0/0 to any port 443
 ufw allow from 103.21.244.0/22 to any port 443
 ufw allow from 103.22.200.0/22 to any port 443
 ufw allow from 103.31.4.0/22 to any port 443

@@ -78,7 +78,8 @@ class LandingPage(tornado.web.RequestHandler):
 def make_app():
     return tornado.web.Application([
         (r"/verify", MainHandler),
-        (r"/", LandingPage)
+        (r"/", LandingPage),
+        (r'/static/(.*)', tornado.web.StaticFileHandler, {'path': 'html/static/'})
     ])
 
 if __name__ == "__main__":

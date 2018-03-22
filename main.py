@@ -79,7 +79,9 @@ def make_app():
     return tornado.web.Application([
         (r"/verify", MainHandler),
         (r"/", LandingPage),
-        (r'/static/(.*)', tornado.web.StaticFileHandler, {'path': 'html/static/'})
+        (r'/static/(.*)', tornado.web.StaticFileHandler, {'path': 'html/static/'}),
+        (r'/(favicon.ico)', tornado.web.StaticFileHandler, {"path": ""})
+
     ])
 
 if __name__ == "__main__":

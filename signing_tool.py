@@ -8,13 +8,15 @@ from settings import *
 client = input("Client Name:")
 work_nature = input("What work was performed?:")
 description = input("Enter a description of the work (e.g. commit hash, URL):")
+link = input("Enter a link to the project(github/blockchain):")
 date = datetime.datetime.now()
 
 message = {
   "client_name" : client,
   "date_signed" : str(date),
   "nature_of_work" : work_nature,
-  "description" : description
+  "description" : description,
+  "link" : link
 }
 b64_msg = json.dumps(message).encode()
 if 'y' in input("Are you happy with the below message:\n\n{}\n\n(y/n)".format(message)):

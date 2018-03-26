@@ -33,7 +33,12 @@ if 'y' in input("Are you happy with the below message:\n\n{}\n\n(y/n)".format(me
     signed_file.close()
     os.remove(filepath)
     os.remove(filepath+'.asc')
-    print()
-    print (content)
+    badge = open("badge.html")
+    contents = badge.read()
+    badge.close()
+
+    contents = contents.replace("{{link}}", "https://{}/verify?verification={}".format(dnsname_used_for_verificaiton, base64.b64encode(content.encode()).decode()))
+
+
     print ('============\nFINAL\n============\n\n')
-    print("https://{}/verify?verification={}".format(dnsname_used_for_verificaiton, base64.b64encode(content.encode()).decode()))
+    print(contents)

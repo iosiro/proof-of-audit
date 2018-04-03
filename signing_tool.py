@@ -18,6 +18,24 @@ message = {
   "description" : description,
   "link" : link
 }
+if 'y' in input("Would you like to give a contract by contract specification of what was audited along with the hash of said contract?:"):
+    contract_name = input("\n[+] Please enter the name of the contract. Type 'END' to finish:")
+    contracts = []
+    while 'END' not in contract_name:
+        string = ""
+        string+=contract_name
+        if 'y' in input("\tDo you want to add a hash for the file '{}'?".format(contract_name)):
+            hash = input("\tPlease enter the commit hash for the contract:")
+            string+=": "+hash
+        contracts.append(string)
+        contract_name = input("\n\n[+] Please enter the name of the contract. Type 'END' to finish:")
+        print("[+] Currently {} contracts listed.".format(len(contracts)))
+
+    if len(contracts) > 0:
+        message["contracts"] = contracts
+
+
+
 b64_msg = json.dumps(message).encode()
 if 'y' in input("Are you happy with the below message:\n\n{}\n\n(y/n)".format(message)):
     print (b64_msg.decode())

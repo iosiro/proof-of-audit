@@ -34,7 +34,24 @@
                                 <tr>
                                     <th>Description</th>
                                     <td style="font-size: small;">{{description}}</td>
+
                                 </tr>
+
+                                {% if contracts %}
+                                <tr>
+                                <th>Contracts Audited</th>
+                                <td style="font-size: small;">
+                                  The following contracts were audited by iosiro:
+                                  <br/><br/>
+                                <ul>
+                                    {% for contract in contracts %}
+                                      <li  style="font-size: small;">{{ escape(contract) }}</li>
+                                    {% end %}
+                                </ul>
+                                </tr>
+                                {% end %}
+                              </td>
+
                                 <tr>
                                     <th>Date Signed</th>
                                     <td style="font-size: small;">{{date_signed}}</td>

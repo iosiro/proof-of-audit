@@ -18,8 +18,20 @@ class MainHandler(tornado.web.RequestHandler):
                 if checkpgp:
                     msg = extract_message_from_signed_pgp(decoded.decode())
                     verification_values = json.loads(msg)
-                    self.render("html/success.html", client_name = verification_values['client_name'],
-                    description= verification_values['description'], date_signed=verification_values['date_signed'].split(" ")[0], nature_of_work=verification_values['nature_of_work'], link=verification_values['link'] )
+
+                    #In case we get passed the contracts parameter
+                    print(verification_values)
+                    if verification_values.get("contracts", False):
+                        print (verification_values['contracts'])
+                        self.render("html/success.html", client_name = verification_values['client_name'],
+                    description= verification_values['description'], date_signed=verification_values['date_signed'].split(" ")[0],
+                    nature_of_work=verification_values['nature_of_work'], link=verification_values['link'],
+                    contracts=verification_values['contracts'])
+                    else:
+                        self.render("html/success.html", client_name = verification_values['client_name'],
+                    description= verification_values['description'], date_signed=verification_values['date_signed'].split(" ")[0],
+                    nature_of_work=verification_values['nature_of_work'], link=verification_values['link'],
+                    contracts=[])
                 else:
                     self.render("html/error.html", error_message="The signature on the badge is incorrect!")
             except Exception as e:

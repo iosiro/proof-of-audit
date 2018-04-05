@@ -51,12 +51,37 @@ if 'y' in input("Are you happy with the below message:\n\n{}\n\n(y/n)".format(me
     signed_file.close()
     os.remove(filepath)
     os.remove(filepath+'.asc')
-    badge = open("badge.html")
-    contents = badge.read()
-    badge.close()
+
+    print ('============\nFINAL\n============\n\n')
+
+    ####
+    # GENERATE THE DARK BADGE
+    ####
+
+    badge_light = open("badge_light.html")
+    contents = badge_light.read()
+    badge_light.close()
 
     contents = contents.replace("{{link}}", "https://{}/verify?verification={}".format(dnsname_used_for_verificaiton, base64.b64encode(content.encode()).decode()))
 
+    client_badge_light = open("client_badges/iosiro_{}_light.html".format(client.replace(" ", "")), 'w')
+    client_badge_light.write(contents)
+    client_badge_light.close()
 
-    print ('============\nFINAL\n============\n\n')
+    print (contents)
+    ####
+    # GENERATE THE DARK BADGE
+    ####
+
+    badge_dark = open("badge_dark.html")
+    contents = badge_dark.read()
+    badge_dark.close()
+
+    contents = contents.replace("{{link}}", "https://{}/verify?verification={}".format(dnsname_used_for_verificaiton, base64.b64encode(content.encode()).decode()))
+
+    client_badge_dark = open("client_badges/iosiro_{}_dark.html".format(client.replace(" ", "")), 'w')
+    client_badge_dark.write(contents)
+    client_badge_dark.close()
+
+
     print(contents)

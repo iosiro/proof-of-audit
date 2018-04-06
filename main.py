@@ -100,5 +100,5 @@ if __name__ == "__main__":
     #Import public key...
     os.system("gpg --import public_key.pub")
     app = make_app()
-    app.listen(8888)
+    app.listen(8888, "localhost")
     tornado.ioloop.IOLoop.current().start()

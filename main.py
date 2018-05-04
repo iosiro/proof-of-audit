@@ -40,6 +40,21 @@ class MainHandler(tornado.web.RequestHandler):
         else:
             self.render("html/error.html", error_message="Hmmmm. That badge wasn't configured correctly. Please let the website know!")
 
+class ButtonChooser(tornado.web.RequestHandler):
+    def get(self):
+        verification_stringb64 = self.get_argument("verification", None)
+        if verification_stringb64:
+            try:
+                decoded = base64.b64decode(verification_stringb64)
+                checkpgp = verify_pgp_signature(decoded)
+                if checkpgp:
+                    msg = extract_message_from_signed_pgp(decoded.decode())
+                    verification_values = json.loads(msg)
+
+        else:
+            self.render("html/error.html", error_message="Hmmmm. That badge wasn't configured correctly. Please let the website know!")
+
+
 def extract_message_from_signed_pgp(text):
     start = '''-----BEGIN PGP SIGNED MESSAGE-----
 Hash: SHA512
@@ -90,6 +105,7 @@ class LandingPage(tornado.web.RequestHandler):
 def make_app():
     return tornado.web.Application([
         (r"/verify", MainHandler),
+        (r"/choose-button, ButtonChooser)
         (r"/", LandingPage),
         (r'/static/(.*)', tornado.web.StaticFileHandler, {'path': 'html/static/'}),
         (r'/(favicon.ico)', tornado.web.StaticFileHandler, {"path": ""})

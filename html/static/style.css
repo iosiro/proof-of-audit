@@ -6,6 +6,7 @@ body {
 body {
   color: #000;
   text-align: center;
+  list-style-position: inside;
 }
 
 .box-padding {

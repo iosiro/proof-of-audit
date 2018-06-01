@@ -15,13 +15,18 @@ class MainHandler(tornado.web.RequestHandler):
             try:
                 decoded = base64.b64decode(verification_stringb64)
                 checkpgp = verify_pgp_signature(decoded)
+                print("Done checking the pgp sig")
                 if checkpgp:
                     msg = extract_message_from_signed_pgp(decoded.decode())
                     verification_values = json.loads(msg)
 
                     #In case we get passed the contracts parameter
                     print(verification_values)
+                    print("Checking")
+                    print(verification_values['date_signed'].split(" ")[0])
+                    print("done checking")
                     if verification_values.get("contracts", False):
+                        print("Found contracts")
                         print (verification_values['contracts'])
                         self.render("html/success.html", client_name = verification_values['client_name'],
                     description= verification_values['description'], date_signed=verification_values['date_signed'].split(" ")[0],
@@ -41,11 +46,18 @@ class MainHandler(tornado.web.RequestHandler):
             self.render("html/error.html", error_message="Hmmmm. That badge wasn't configured correctly. Please let the website know!")
 
 def extract_message_from_signed_pgp(text):
-    start = '''-----BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA512
-'''
+    hash_alg = 'SHA512'
+    if 'SHA256' in text[:50]:
+        hash_alg = 'SHA256'
+    start = r'''-----BEGIN PGP SIGNED MESSAGE-----
+Hash: {}
+'''.format(hash_alg)
     end = "-----BEGIN PGP SIGNATURE-----"
+    print("about to extracting....")
+    print(text)
+    print(text.split(start)[1])
     msg = text.split(start)[1].split(end)[0]
+    print("done extracting...")
     return msg
 
 def verify_pgp_signature(text):
